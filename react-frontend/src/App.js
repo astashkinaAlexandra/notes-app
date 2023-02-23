@@ -1,5 +1,11 @@
-const App = () => {
-    return <p>hello world!</p>
-};
+import NotesList from "./components/NotesList";
+
+function App() {
+    return (
+        <div className='container'>
+            <NotesList/>
+        </div>
+    );
+}
 
 export default App;
