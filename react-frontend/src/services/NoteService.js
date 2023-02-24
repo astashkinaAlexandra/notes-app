@@ -7,6 +7,11 @@ class NoteService {
     getNotes() {
         return axios.get(NOTE_API_BASE_URL);
     }
+
+    createNote(note) {
+        return axios.post(NOTE_API_BASE_URL, note);
+    }
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new NoteService();

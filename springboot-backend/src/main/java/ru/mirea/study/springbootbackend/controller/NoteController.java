@@ -1,9 +1,7 @@
 package ru.mirea.study.springbootbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.mirea.study.springbootbackend.model.Note;
 import ru.mirea.study.springbootbackend.repository.NoteRepository;
 
@@ -20,5 +18,11 @@ public class NoteController {
     @GetMapping("/notes")
     public List<Note> getAllNotes() {
         return noteRepository.findAll();
+    }
+
+    // create note rest api
+    @PostMapping("/notes")
+    public Note createNote(@RequestBody Note note) {
+        return noteRepository.save(note);
     }
 }
