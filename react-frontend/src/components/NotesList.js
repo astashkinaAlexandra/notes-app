@@ -10,6 +10,14 @@ class NotesList extends Component {
         this.state = {
             notes: []
         }
+
+        this.deleteNote = this.deleteNote.bind(this);
+    }
+
+    deleteNote(id) {
+        NoteService.deleteNote(id).then((res) => {
+            this.setState({notes: this.state.notes.filter(note => note.id !== id)});
+        });
     }
 
     componentDidMount() {
@@ -29,7 +37,8 @@ class NotesList extends Component {
                                 <span>{note.text}</span>
                                 <div className='note-footer'>
                                     <small>{note.createdDate}</small>
-                                    <MdDeleteForever className='delete-icon' size='1.3em'/>
+                                    <MdDeleteForever onClick={() => this.deleteNote(note.id)}
+                                                     className='delete-icon' size='1.3em'/>
                                 </div>
                             </div>
                     )

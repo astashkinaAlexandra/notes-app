@@ -11,6 +11,10 @@ class NoteService {
     createNote(note) {
         return axios.post(NOTE_API_BASE_URL, note);
     }
+
+    deleteNote(noteId) {
+        return axios.delete(NOTE_API_BASE_URL + '/' + noteId);
+    }
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
