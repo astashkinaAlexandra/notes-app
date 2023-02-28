@@ -14,12 +14,11 @@ const App = () => {
             text: text
         }
         const newNotes = [...notes, newNote];
-        setNotes(newNotes);
+        NoteService.createNote(newNote).then(response => setNotes(newNotes));
     };
 
     const deleteNote = (id) => {
-        const newNotes = notes.filter((note) => note.id !== id);
-        setNotes(newNotes);
+        NoteService.deleteNote(id).then(response => setNotes(notes.filter((note) => note.id !== id)));
     };
 
     return (
