@@ -12,6 +12,10 @@ class NoteService {
         return axios.post(NOTE_API_BASE_URL, note);
     }
 
+    updateNote(noteId, note) {
+        return axios.put(NOTE_API_BASE_URL + '/' + noteId, note);
+    }
+
     deleteNote(noteId) {
         return axios.delete(NOTE_API_BASE_URL + '/' + noteId);
     }

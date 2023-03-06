@@ -17,6 +17,17 @@ const App = () => {
         NoteService.createNote(newNote).then(response => setNotes(newNotes));
     };
 
+    const updateNote = (id, text) => {
+        const updatedNote = {
+            id: id,
+            text: text
+        };
+        const newNotes = notes.map((notes) =>
+            notes.id === id ? updatedNote : notes
+        );
+        NoteService.updateNote(id, updatedNote).then(response => setNotes(newNotes));
+    };
+
     const deleteNote = (id) => {
         NoteService.deleteNote(id).then(response => setNotes(notes.filter((note) => note.id !== id)));
     };
@@ -25,6 +36,7 @@ const App = () => {
         <div className='container'>
             <NotesList notes={notes}
                        handleAddNote={addNote}
+                       handleUpdateNote={updateNote}
                        handleDeleteNote={deleteNote}
             />
         </div>
