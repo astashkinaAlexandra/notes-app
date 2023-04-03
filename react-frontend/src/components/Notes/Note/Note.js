@@ -1,8 +1,9 @@
 import {MdEdit, MdDeleteForever} from 'react-icons/md';
 import {useState} from "react";
+// import "../Notes.css"
 
-const Note = ({id, text, createdDate, handleUpdateNote, handleDeleteNote}) => {
-    const [noteText, setNoteText] = useState(text);
+const Note = ({note, handleUpdateNote, handleDeleteNote}) => {
+    const [noteText, setNoteText] = useState(note.text);
 
     const handleChange = (event) => {
         setNoteText(event.target.value);
@@ -13,24 +14,23 @@ const Note = ({id, text, createdDate, handleUpdateNote, handleDeleteNote}) => {
             <textarea className='update'
                       cols="10"
                       rows="8"
-                      defaultValue={text}
+                      defaultValue={note.text}
                       onChange={handleChange}>
             </textarea>
             <div className='note-footer'>
-                <small>{createdDate}</small>
+                <small>{note.createdDate}</small>
                 <div className='buttons'>
                     <MdEdit
-                        onClick={() => handleUpdateNote(id, noteText)}
+                        onClick={() => handleUpdateNote(note.id, noteText)}
                         className="delete-icon"
                         size="1.3em"
                     />
-                    < MdDeleteForever
-                        onClick={() => handleDeleteNote(id)}
+                    <MdDeleteForever
+                        onClick={() => handleDeleteNote(note.id)}
                         className='delete-icon'
                         size='1.3em'
                     />
                 </div>
-
             </div>
         </div>
     );

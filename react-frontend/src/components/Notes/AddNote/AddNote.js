@@ -1,4 +1,5 @@
 import {useState} from "react";
+// import "../Notes.css"
 
 const AddNote = ({handleAddNote}) => {
     const [noteText, setNoteText] = useState('');

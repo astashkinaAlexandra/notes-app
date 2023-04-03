@@ -1,44 +1,116 @@
 import {useEffect, useState} from "react";
-import NotesList from "./components/NotesList";
-import NoteService from "./services/NoteService";
+import NotesList from "./components/Notes/NotesList/NotesList";
+
+import AuthService from "./services/auth.service";
+
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+import BoardUser from "./components/BoardUser";
+import BoardModerator from "./components/BoardModerator";
+import BoardAdmin from "./components/BoardAdmin";
+import {Link, Route, Routes} from "react-router-dom";
 
 const App = () => {
-    const [notes, setNotes] = useState([]);
+    const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+    const [showAdminBoard, setShowAdminBoard] = useState(false);
+    const [currentUser, setCurrentUser] = useState(undefined);
 
     useEffect(() => {
-        NoteService.getNotes().then(response => setNotes(response.data));
+        const user = AuthService.getCurrentUser();
+
+        if (user) {
+            setCurrentUser(user);
+            setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+            setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+        }
     }, []);
 
-    const addNote = (text) => {
-        const newNote = {
-            text: text
-        }
-        const newNotes = [...notes, newNote];
-        NoteService.createNote(newNote).then(response => setNotes(newNotes));
-    };
-
-    const updateNote = (id, text) => {
-        const updatedNote = {
-            id: id,
-            text: text
-        };
-        const newNotes = notes.map((notes) =>
-            notes.id === id ? updatedNote : notes
-        );
-        NoteService.updateNote(id, updatedNote).then(response => setNotes(newNotes));
-    };
-
-    const deleteNote = (id) => {
-        NoteService.deleteNote(id).then(response => setNotes(notes.filter((note) => note.id !== id)));
+    const logOut = () => {
+        AuthService.logout();
     };
 
     return (
-        <div className='container'>
-            <NotesList notes={notes}
-                       handleAddNote={addNote}
-                       handleUpdateNote={updateNote}
-                       handleDeleteNote={deleteNote}
-            />
+        <div>
+            <nav className="navbar navbar-expand navbar-dark bg-dark">
+                <Link to={"/"} className="navbar-brand">
+                    bezKoder
+                </Link>
+                <div className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <Link to={"/home"} className="nav-link">
+                            Home
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={"/notes"} className="nav-link">
+                            Notes
+                        </Link>
+                    </li>
+                    {showModeratorBoard && (
+                        <li className="nav-item">
+                            <Link to={"/mod"} className="nav-link">
+                                Moderator Board
+                            </Link>
+                        </li>
+                    )}
+                    {showAdminBoard && (
+                        <li className="nav-item">
+                            <Link to={"/admin"} className="nav-link">
+                                Admin Board
+                            </Link>
+                        </li>
+                    )}
+                    {currentUser && (
+                        <li className="nav-item">
+                            <Link to={"/user"} className="nav-link">
+                                User
+                            </Link>
+                        </li>
+                    )}
+                </div>
+                {currentUser ? (
+                    <div className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <Link to={"/profile"} className="nav-link">
+                                {currentUser.username}
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/login" className="nav-link" onClick={logOut}>
+                                LogOut
+                            </a>
+                        </li>
+                    </div>
+                ) : (
+                    <div className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <Link to={"/login"} className="nav-link">
+                                Login
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to={"/register"} className="nav-link">
+                                Sign Up
+                            </Link>
+                        </li>
+                    </div>
+                )}
+            </nav>
+            <div className="container">
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/home" element={<Home/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
+                    <Route path="/user" element={<BoardUser/>}/>
+                    <Route path="/mod" element={<BoardModerator/>}/>
+                    <Route path="/admin" element={<BoardAdmin/>}/>
+                    <Route path="/notes" element={<NotesList/>}/>
+                </Routes>
+            </div>
         </div>
     );
 };
