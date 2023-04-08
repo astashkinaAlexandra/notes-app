@@ -44,17 +44,19 @@ const NotesList = () => {
     };
 
     return (
-        <div className='notes-list'>
-            <AddNote handleAddNote={addNote}/>
-            {notes.map(note => (
-                <Note
-                    key={note.id}
-                    note={note}
-                    handleUpdateNote={updateNote}
-                    handleDeleteNote={deleteNote}
-                />
-            ))}
-        </div>
+        // <div className="container">
+            <div className='notes-list'>
+                <AddNote handleAddNote={addNote}/>
+                {notes.map(note => (
+                    <Note
+                        key={note.id}
+                        note={note}
+                        handleUpdateNote={updateNote}
+                        handleDeleteNote={deleteNote}
+                    />
+                ))}
+            </div>
+        // </div>
     );
 };
 

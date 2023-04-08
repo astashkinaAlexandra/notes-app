@@ -1,5 +1,4 @@
-import {useEffect, useState} from "react";
-import NotesList from "./components/Notes/NotesList/NotesList";
+import React, {useEffect, useState} from "react";
 
 import AuthService from "./services/auth.service";
 
@@ -11,6 +10,7 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import {Link, Route, Routes} from "react-router-dom";
+import UserDashboard from "./components/UserDashboard";
 
 const App = () => {
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -98,7 +98,7 @@ const App = () => {
                     </div>
                 )}
             </nav>
-            <div className="container">
+            <div>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/home" element={<Home/>}/>
@@ -108,7 +108,7 @@ const App = () => {
                     <Route path="/user" element={<BoardUser/>}/>
                     <Route path="/mod" element={<BoardModerator/>}/>
                     <Route path="/admin" element={<BoardAdmin/>}/>
-                    <Route path="/notes" element={<NotesList/>}/>
+                    <Route path="/notes" element={<UserDashboard/>}/>
                 </Routes>
             </div>
         </div>

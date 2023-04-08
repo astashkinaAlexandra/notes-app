@@ -11,8 +11,7 @@ const Note = ({note, handleUpdateNote, handleDeleteNote}) => {
 
     return (
         <div className='note'>
-            <textarea className='update'
-                      cols="10"
+            <textarea cols="10"
                       rows="8"
                       defaultValue={note.text}
                       onChange={handleChange}>
@@ -22,13 +21,11 @@ const Note = ({note, handleUpdateNote, handleDeleteNote}) => {
                 <div className='buttons'>
                     <MdEdit
                         onClick={() => handleUpdateNote(note.id, noteText)}
-                        className="delete-icon"
-                        size="1.3em"
+                        className="icon"
                     />
                     <MdDeleteForever
                         onClick={() => handleDeleteNote(note.id)}
-                        className='delete-icon'
-                        size='1.3em'
+                        className='icon'
                     />
                 </div>
             </div>
