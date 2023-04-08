@@ -5,6 +5,12 @@
     min-height: 100vh;
     width: calc(100% - 250px);
     padding: 10px 14px;
+    transition: var(--tran-05);
+}
+
+nav.close ~ .dashboard {
+    left: 73px;
+    width: calc(100% - 73px);
 }
 
 .dashboard .top {
@@ -21,7 +27,13 @@
     z-index: 10;
 }
 
-.dashboard .top .sidebar-toggle {
+nav.close ~ .dashboard .top {
+    left: 73px;
+    width: calc(100% - 73px);
+}
+
+.dashboard .top .icon.sidebar-toggle {
+    margin: 0;
     font-size: 26px;
     color: var(--text-color);
     cursor: pointer;
@@ -51,10 +63,8 @@
 
 .top .search-box .icon {
     position: absolute;
-    font-size: 22px;
     left: 15px;
     z-index: 10;
-    top: 25%;
     margin: 0;
     color: var(--black-light-color);
 }
@@ -79,10 +89,9 @@
     justify-content: center;
 }
 
-.dash-content .title .icon{
+.dash-content .title .icon {
     position: relative;
     margin: 0;
-    font-size: 1.3em;
     color: var(--title-icon-color);
 }
 

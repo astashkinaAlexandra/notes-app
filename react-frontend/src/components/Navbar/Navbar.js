@@ -3,9 +3,9 @@ import {IoLogOutOutline, IoMoonOutline} from 'react-icons/io5'
 import './Navbar.css';
 import logo from '../../images/logo.png';
 
-const Navbar = () => {
+const Navbar = ({isOpen}) => {
     return (
-        <nav>
+        <nav className={isOpen ? "nav" : "nav close"}>
             <div className="logo-name">
                 <div className="logo-img">
                     <img src={logo} alt="logo"/>

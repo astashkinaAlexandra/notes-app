@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "./Navbar/Navbar";
 import Dashboard from "./Dashboard/Dashboard";
 
 const UserDashboard = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <React.Fragment>
-            <Navbar></Navbar>
-            <Dashboard></Dashboard>
+            <Navbar isOpen={isOpen}></Navbar>
+            <Dashboard isOpen={isOpen} setIsOpen={setIsOpen}></Dashboard>
         </React.Fragment>
     );
 };

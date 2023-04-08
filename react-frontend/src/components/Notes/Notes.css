@@ -41,11 +41,11 @@ textarea {
     font-size: 18px;
     font-weight: 400;
     color: var(--text-color);
-    background-color: var(--box3-color);
+    background-color: var(--note1-color);
 }
 
 .note.new textarea {
-    background-color: var(--box1-color);
+    background-color: var(--note2-color);
 }
 
 textarea:focus {
@@ -82,7 +82,7 @@ small {
 
 .notes-list .icon {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 18px;
     color: var(--text-color);
     cursor: pointer;
 }

@@ -43,6 +43,10 @@ nav {
     border-right: 1px solid var(--border-color);
 }
 
+.nav.close {
+    width: 73px;
+}
+
 nav .logo-name {
     display: flex;
     align-items: center;
@@ -65,6 +69,12 @@ nav .logo-name .logo_name {
     font-size: 22px;
     font-weight: 600;
     color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+nav.close .logo_name {
+    opacity: 0;
+    pointer-events: none;
 }
 
 nav .menu-items {
@@ -98,9 +108,9 @@ nav .menu-items {
 }
 
 .icon {
-    font-size: 1.5em;
-    /*height: 100%;*/
-    margin: 12px;
+    min-width: 1.5em;
+    height: 100%;
+    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,6 +121,12 @@ nav .menu-items {
     font-size: 18px;
     font-weight: 400;
     color: var(--black-light-color);
+    transition: var(--tran-05);
+}
+
+.nav.close li a .link-name {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .nav-links li a:hover .icon,
@@ -126,6 +142,7 @@ nav .menu-items {
 .menu-items .mode {
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 
 .menu-items .mode-toggle {

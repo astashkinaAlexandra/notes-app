@@ -5,11 +5,13 @@ import {FaRegStickyNote} from "react-icons/fa";
 import './Dashboard.css';
 import NotesList from "../Notes/NotesList/NotesList";
 
-const Dashboard = () => {
+const Dashboard = ({isOpen, setIsOpen}) => {
+    const toggle = () => setIsOpen(!isOpen);
+
     return (
         <section className="dashboard">
             <div className="top">
-                <HiBars3 className="sidebar-toggle"></HiBars3>
+                <HiBars3 className="icon sidebar-toggle" onClick={toggle}></HiBars3>
                 <div className="search-box">
                     <AiOutlineSearch className="icon"></AiOutlineSearch>
                     <input type="text" placeholder="Search here..."/>
