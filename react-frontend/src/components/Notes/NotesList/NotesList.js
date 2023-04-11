@@ -6,56 +6,50 @@ import "../Notes.css"
 
 const NotesList = () => {
     const [notes, setNotes] = useState([]);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-        NoteService.getNotes().then(response => {
-            setNotes(response.data);
-            setLoading(false);
-        });
+        getAllNotes();
     }, []);
 
-    if (loading) {
-        return <p>Loading...</p>;
+    const getAllNotes = async () => {
+        await NoteService.getNotes().then(response => {
+            setNotes(response.data);
+        });
     }
 
-    const addNote = (text) => {
-        const newNote = {
-            text: text
-        }
-        const newNotes = [...notes, newNote];
-        NoteService.createNote(newNote).then(response => setNotes(newNotes));
+    const addNote = async (newNote) => {
+        await NoteService.createNote(newNote).then(() => {
+            getAllNotes()
+        });
     };
 
-    const updateNote = (id, text) => {
+    const updateNote = async (id, text) => {
         const updatedNote = {
             id: id,
             text: text
         };
-        const newNotes = notes.map((notes) =>
-            notes.id === id ? updatedNote : notes
-        );
-        NoteService.updateNote(id, updatedNote).then(response => setNotes(newNotes));
+        await NoteService.updateNote(id, updatedNote).then(() => {
+            getAllNotes()
+        })
     };
 
-    const deleteNote = (id) => {
+    const deleteNote = async (id) => {
         NoteService.deleteNote(id).then(response => setNotes(notes.filter((note) => note.id !== id)));
     };
 
     return (
         // <div className="container">
-            <div className='notes-list'>
-                <AddNote handleAddNote={addNote}/>
-                {notes.map(note => (
-                    <Note
-                        key={note.id}
-                        note={note}
-                        handleUpdateNote={updateNote}
-                        handleDeleteNote={deleteNote}
-                    />
-                ))}
-            </div>
+        <div className='notes-list'>
+            <AddNote handleAddNote={addNote}/>
+            {notes.map(note => (
+                <Note
+                    key={note.id}
+                    note={note}
+                    handleUpdateNote={updateNote}
+                    handleDeleteNote={deleteNote}
+                />
+            ))}
+        </div>
         // </div>
     );
 };

@@ -8,9 +8,15 @@ const AddNote = ({handleAddNote}) => {
         setNoteText(event.target.value);
     };
 
-    const handleSaveClick = () => {
+    const handleSaveClick = (event) => {
+        event.preventDefault();
+
+        const newNote = {
+            text: noteText
+        }
+
         if (noteText.trim().length > 0) {
-            handleAddNote(noteText);
+            handleAddNote(newNote);
             setNoteText('');
         }
     };
