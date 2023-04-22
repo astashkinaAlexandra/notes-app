@@ -1,6 +1,7 @@
 package ru.mirea.study.springbootbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -15,8 +16,21 @@ public class Note {
     @Column(name = "text")
     private String text;
     @Column(name = "created_date")
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date createdDate = new Date(System.currentTimeMillis());
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "folder_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
+    private Folder folder;
+
+    public Folder getFolder() {
+        return folder;
+    }
+
+    public void setFolder(Folder folder) {
+        this.folder = folder;
+    }
 
     public Note() {
 

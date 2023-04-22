@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.mirea.study.springbootbackend.exception.ResourceNotFoundException;
 import ru.mirea.study.springbootbackend.model.Note;
+import ru.mirea.study.springbootbackend.repository.FolderRepository;
 import ru.mirea.study.springbootbackend.repository.NoteRepository;
 
 import java.util.HashMap;
@@ -18,6 +19,8 @@ public class NoteController {
 
     @Autowired
     private NoteRepository noteRepository;
+    @Autowired
+    private FolderRepository folderRepository;
 
     // get all notes
     @GetMapping("/notes")
@@ -25,18 +28,26 @@ public class NoteController {
         return noteRepository.findAll();
     }
 
-    // create note rest api
-    @PostMapping("/notes")
-    public Note createNote(@RequestBody Note note) {
-        return noteRepository.save(note);
+    // get notes by folder id
+    @GetMapping("/folders/{id}/notes")
+    public ResponseEntity<List<Note>> getAllNotesByFolderId(@PathVariable(value = "id") Long folderId) throws ResourceNotFoundException {
+        if (!folderRepository.existsById(folderId)) {
+            throw new ResourceNotFoundException("Notes not found for this folder id: " + folderId);
+        }
+
+        List<Note> notes = noteRepository.findByFolderId(folderId);
+        return ResponseEntity.ok().body(notes);
     }
 
-    // get note by id rest api
-    @GetMapping("/notes/{id}")
-    public ResponseEntity<Note> getNoteById(@PathVariable Long id) {
-        Note note = noteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Note not exist with id: " + id));
-        return ResponseEntity.ok(note);
+    // create note rest api
+    @PostMapping("/folders/{id}/notes")
+    public ResponseEntity<Note> createFolderNote(@PathVariable(value = "id") Long folderId,
+                                                 @RequestBody Note noteRequest) throws ResourceNotFoundException {
+        Note note = folderRepository.findById(folderId).map(folder -> {
+            noteRequest.setFolder(folder);
+            return noteRepository.save(noteRequest);
+        }).orElseThrow(() -> new ResourceNotFoundException("Folder not found for this id: " + folderId));
+        return ResponseEntity.ok().body(note);
     }
 
     // update note rest api
@@ -62,5 +73,17 @@ public class NoteController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/folders/{id}/notes")
+    public Map<String, Boolean> deleteAllNotesOfFolder(@PathVariable(value = "id") Long folderId) throws ResourceNotFoundException {
+        if (!folderRepository.existsById(folderId)){
+            throw new ResourceNotFoundException("Folder not found for this id: " + folderId);
+        }
+
+        noteRepository.deleteByFolderId(folderId);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }
