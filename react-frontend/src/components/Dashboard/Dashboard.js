@@ -5,7 +5,7 @@ import {FaRegStickyNote} from "react-icons/fa";
 import './Dashboard.css';
 import NotesList from "../Notes/NotesList/NotesList";
 
-const Dashboard = ({isOpen, setIsOpen}) => {
+const Dashboard = ({folderId, isOpen, setIsOpen}) => {
     const toggle = () => setIsOpen(!isOpen);
 
     return (
@@ -25,7 +25,7 @@ const Dashboard = ({isOpen, setIsOpen}) => {
                         </div>
                         <span className="text">Notes</span>
                     </div>
-                    <NotesList></NotesList>
+                    <NotesList folderId={folderId}></NotesList>
                 </div>
             </div>
         </section>

@@ -109,6 +109,9 @@ const App = () => {
                     <Route path="/mod" element={<BoardModerator/>}/>
                     <Route path="/admin" element={<BoardAdmin/>}/>
                     <Route path="/notes" element={<UserDashboard/>}/>
+
+                    <Route path="/notes" element={<UserDashboard/>}/>
+                    <Route path="/folders/:folderId/notes" element={<UserDashboard/>}/>
                 </Routes>
             </div>
         </div>

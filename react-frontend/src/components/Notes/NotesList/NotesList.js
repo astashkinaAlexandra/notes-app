@@ -4,22 +4,32 @@ import NoteService from "../../../services/note.service";
 import {useEffect, useState} from "react";
 import "../Notes.css"
 
-const NotesList = () => {
+const NotesList = ({folderId}) => {
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
-        getAllNotes();
-    }, []);
+        if (folderId) {
+            getNotesByFolderId();
+        } else {
+            getAllNotes();
+        }
+    }, [folderId]);
 
     const getAllNotes = async () => {
-        await NoteService.getNotes().then(response => {
+        await NoteService.getAllNotes().then(response => {
             setNotes(response.data);
         });
-    }
+    };
+
+    const getNotesByFolderId = async () => {
+        await NoteService.getNotesByFolderId(folderId).then(response => {
+            setNotes(response.data);
+        });
+    };
 
     const addNote = async (newNote) => {
-        await NoteService.createNote(newNote).then(() => {
-            getAllNotes()
+        await NoteService.createNote(folderId, newNote).then(() => {
+            getNotesByFolderId();
         });
     };
 
@@ -29,8 +39,8 @@ const NotesList = () => {
             text: text
         };
         await NoteService.updateNote(id, updatedNote).then(() => {
-            getAllNotes()
-        })
+            getNotesByFolderId();
+        });
     };
 
     const deleteNote = async (id) => {
@@ -38,9 +48,10 @@ const NotesList = () => {
     };
 
     return (
-        // <div className="container">
         <div className='notes-list'>
-            <AddNote handleAddNote={addNote}/>
+            <AddNote
+                folderId={folderId}
+                handleAddNote={addNote}/>
             {notes.map(note => (
                 <Note
                     key={note.id}
@@ -50,7 +61,6 @@ const NotesList = () => {
                 />
             ))}
         </div>
-        // </div>
     );
 };
 

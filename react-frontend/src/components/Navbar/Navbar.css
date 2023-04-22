@@ -89,6 +89,21 @@ nav .menu-items {
     list-style: none;
 }
 
+.menu-items .folder-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-items .folder-item .icon-delete {
+    display: none;
+}
+
+.menu-items .folder-item:hover .icon-delete {
+    display: block;
+    color: var(--primary-color);
+}
+
 .menu-items li a {
     display: flex;
     align-items: center;
@@ -97,7 +112,7 @@ nav .menu-items {
     position: relative;
 }
 
-.nav-links li a:hover:before {
+.nav-links li:not(:last-child) a:hover:before {
     content: "";
     position: absolute;
     left: -7px;
@@ -117,14 +132,24 @@ nav .menu-items {
     color: var(--black-light-color);
 }
 
-.menu-items li a .link-name {
+.menu-items li a .link-name,
+.menu-items li a input {
     font-size: 18px;
     font-weight: 400;
     color: var(--black-light-color);
     transition: var(--tran-05);
 }
 
-.nav.close li a .link-name {
+.menu-items li a input {
+    border: none;
+}
+
+.menu-items li a input:focus {
+    outline: none;
+}
+
+.nav.close li a .link-name,
+.nav.close li a input {
     opacity: 0;
     pointer-events: none;
 }
