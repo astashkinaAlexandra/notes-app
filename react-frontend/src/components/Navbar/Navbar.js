@@ -8,7 +8,7 @@ import AddFolder from "../Folder/AddFolder";
 import {Link} from "react-router-dom";
 import AuthService from "../../services/auth.service";
 
-const Navbar = ({isOpen}) => {
+const Navbar = ({isOpen, handleToggleDarkMode}) => {
     const currentUserId = AuthService.getCurrentUser().id;
     const [folders, setFolders] = useState([]);
 
@@ -69,7 +69,7 @@ const Navbar = ({isOpen}) => {
                             <IoMoonOutline className="icon"></IoMoonOutline>
                             <span className="link-name">Dark Mode</span>
                         </a>
-                        <div className="mode-toggle">
+                        <div className="mode-toggle" onClick={handleToggleDarkMode}>
                             <span className="switch"></span>
                         </div>
                     </li>

@@ -30,6 +30,26 @@
 
 body {
     min-height: 100vh;
+    background-color: var(--primary-color);
+}
+
+body .dark-mode {
+    /* ===== Colors ===== */
+    --primary-color: #3A3B3C;
+    --panel-color: #242526;
+    --text-color: #CCC;
+    --black-light-color: #CCC;
+    --border-color: #4D4C4C;
+    --toggle-color: #FFF;
+    --note1-color: #3A3B3C;
+    --note2-color: #3A3B3C;
+    --note3-color: #3A3B3C;
+    --note4-color: #3A3B3C;
+    --title-icon-color: #fff;
+}
+
+::placeholder {
+    color: var(--black-light-color);
 }
 
 nav {
@@ -41,6 +61,7 @@ nav {
     padding: 10px 14px;
     background-color: var(--panel-color);
     border-right: 1px solid var(--border-color);
+    transition: var(--tran-05);
 }
 
 .nav.close {
@@ -95,6 +116,16 @@ nav .menu-items {
     justify-content: space-between;
 }
 
+.nav-links .folder-item a:hover:before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
 .menu-items .folder-item .icon-delete {
     display: none;
 }
@@ -112,16 +143,6 @@ nav .menu-items {
     position: relative;
 }
 
-.nav-links li:not(:last-child) a:hover:before {
-    content: "";
-    position: absolute;
-    left: -7px;
-    height: 5px;
-    width: 5px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-}
-
 .icon {
     min-width: 1.5em;
     height: 100%;
@@ -132,12 +153,19 @@ nav .menu-items {
     color: var(--black-light-color);
 }
 
-.menu-items li a .link-name,
+.menu-items li a .link-name {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--black-light-color);
+    transition: var(--tran-05);
+}
+
 .menu-items li a input {
     font-size: 18px;
     font-weight: 400;
     color: var(--black-light-color);
     transition: var(--tran-05);
+    background-color: var(--panel-color);
 }
 
 .menu-items li a input {
@@ -201,4 +229,8 @@ nav .menu-items {
     background-color: var(--panel-color);
     border-radius: 50%;
     transition: var(--tran-03);
+}
+
+body .dark-mode .switch:before {
+    left: 20px;
 }
