@@ -6,29 +6,35 @@ import {useEffect, useState} from "react";
 import FolderService from "../../services/folder.service";
 import AddFolder from "../Folder/AddFolder";
 import {Link} from "react-router-dom";
-import {BsFolder} from "react-icons/bs";
+import AuthService from "../../services/auth.service";
 
 const Navbar = ({isOpen}) => {
+    const currentUserId = AuthService.getCurrentUser().id;
     const [folders, setFolders] = useState([]);
 
     useEffect(() => {
-        getAllFolders();
-    }, []);
+        getFoldersByUserId();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentUserId]);
 
-    const getAllFolders = async () => {
-        await FolderService.getFolders().then(response => {
+    const getFoldersByUserId = async () => {
+        await FolderService.getFoldersByUserId(currentUserId).then(response => {
             setFolders(response.data)
         });
-    }
+    };
 
     const addFolder = async (newFolder) => {
-        await FolderService.createFolder(newFolder).then(() => {
-            getAllFolders()
+        await FolderService.createFolder(currentUserId, newFolder).then(() => {
+            getFoldersByUserId()
         });
     };
 
     const deleteFolder = async (id) => {
         FolderService.deleteFolder(id).then(response => setFolders(folders.filter((folder) => folder.id !== id)));
+    };
+
+    const logOut = () => {
+        AuthService.logout();
     };
 
     return (
@@ -41,14 +47,6 @@ const Navbar = ({isOpen}) => {
             </div>
             <div className="menu-items">
                 <ul className="nav-links">
-                    <Link to={`/notes`} style={{textDecoration: 'none'}}>
-                        <li>
-                            <a href="#">
-                                <BsFolder className="icon"></BsFolder>
-                                <span className="link-name">All notes</span>
-                            </a>
-                        </li>
-                    </Link>
                     {folders.map(folder => (
                         <Link key={folder.id} to={`/folders/${folder.id}/notes`} style={{textDecoration: 'none'}}>
                             <Folder key={folder.id}
@@ -61,7 +59,7 @@ const Navbar = ({isOpen}) => {
                 </ul>
                 <ul className="logout-mode">
                     <li>
-                        <a href="#">
+                        <a href="/login" onClick={logOut}>
                             <IoLogOutOutline className="icon"></IoLogOutOutline>
                             <span className="link-name">Logout</span>
                         </a>

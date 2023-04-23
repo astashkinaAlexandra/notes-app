@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.mirea.study.springbootbackend.exception.ResourceNotFoundException;
 import ru.mirea.study.springbootbackend.model.Folder;
 import ru.mirea.study.springbootbackend.repository.FolderRepository;
+import ru.mirea.study.springbootbackend.repository.UserRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +20,24 @@ public class FolderController {
     @Autowired
     private FolderRepository folderRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     // get all folders
     @GetMapping("/folders")
     public List<Folder> getAllFolders() {
         return folderRepository.findAll();
+    }
+
+    // get folders by user id
+    @GetMapping("/users/{id}/folders")
+    public ResponseEntity<List<Folder>> getFoldersByUserId(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
+        if (!userRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("Folders not found for this user id: " + userId);
+        }
+
+        List<Folder> folders = folderRepository.findByUserId(userId);
+        return ResponseEntity.ok().body(folders);
     }
 
     // get folder by id
@@ -35,9 +50,19 @@ public class FolderController {
     }
 
     // create folder rest api
-    @PostMapping("/folders")
-    public Folder createFolder(@RequestBody Folder folder) {
-        return folderRepository.save(folder);
+//    @PostMapping("/folders")
+//    public Folder createFolder(@RequestBody Folder folder) {
+//        return folderRepository.save(folder);
+//    }
+
+    @PostMapping("/users/{id}/folders")
+    public ResponseEntity<Folder> createUserFolder(@PathVariable(value = "id") Long userId,
+                                   @RequestBody Folder folderRequest) throws ResourceNotFoundException {
+        Folder folder = userRepository.findById(userId).map(user -> {
+            folderRequest.setUser(user);
+            return folderRepository.save(folderRequest);
+        }).orElseThrow(() -> new ResourceNotFoundException("User not found for this id: " + userId));
+        return ResponseEntity.ok().body(folder);
     }
 
     @PutMapping("/folders/{id}")

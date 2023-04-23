@@ -6,8 +6,12 @@ const getFolders = () => {
     return axios.get(API_URL + "/folders");
 }
 
-const createFolder = (folder) => {
-    return axios.post(API_URL + "/folders", folder);
+const getFoldersByUserId = (userId) => {
+    return axios.get(API_URL + `/users/${userId}/folders`);
+}
+
+const createFolder = (userId, folder) => {
+    return axios.post(API_URL + `/users/${userId}/folders`, folder);
 }
 
 const deleteFolder = (folderId) => {
@@ -16,6 +20,7 @@ const deleteFolder = (folderId) => {
 
 const FolderService = {
     getFolders,
+    getFoldersByUserId,
     createFolder,
     deleteFolder
 }
