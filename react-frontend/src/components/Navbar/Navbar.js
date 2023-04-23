@@ -9,22 +9,22 @@ import {Link} from "react-router-dom";
 import AuthService from "../../services/auth.service";
 
 const Navbar = ({isOpen, handleToggleDarkMode}) => {
-    const currentUserId = AuthService.getCurrentUser().id;
+    const currentUser = AuthService.getCurrentUser();
     const [folders, setFolders] = useState([]);
 
     useEffect(() => {
         getFoldersByUserId();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUserId]);
+    }, [currentUser.id]);
 
     const getFoldersByUserId = async () => {
-        await FolderService.getFoldersByUserId(currentUserId).then(response => {
+        await FolderService.getFoldersByUserId(currentUser.id).then(response => {
             setFolders(response.data)
         });
     };
 
     const addFolder = async (newFolder) => {
-        await FolderService.createFolder(currentUserId, newFolder).then(() => {
+        await FolderService.createFolder(currentUser.id, newFolder).then(() => {
             getFoldersByUserId()
         });
     };

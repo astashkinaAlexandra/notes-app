@@ -6,8 +6,11 @@ import NotesList from "../Notes/NotesList/NotesList";
 import Search from "../Search";
 import {useEffect, useState} from "react";
 import NoteService from "../../services/note.service";
+import Avatar from "boring-avatars";
+import AuthService from "../../services/auth.service";
 
 const Dashboard = ({folderId, isOpen, setIsOpen}) => {
+    const currentUser = AuthService.getCurrentUser();
     const [notes, setNotes] = useState([]);
     const [searchText, setSearchText] = useState('');
 
@@ -48,6 +51,12 @@ const Dashboard = ({folderId, isOpen, setIsOpen}) => {
             <div className="top">
                 <HiBars3 className="icon sidebar-toggle" onClick={toggle}></HiBars3>
                 <Search handleSearchNote={setSearchText}/>
+                <Avatar
+                    size={40}
+                    name={currentUser.username}
+                    variant="beam"
+                    colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
+                />
             </div>
             <div className="dash-content">
                 <div className="overview">
