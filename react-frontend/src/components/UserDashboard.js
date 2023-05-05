@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Navbar from "./Navbar/Navbar";
-import Dashboard from "./Dashboard/Dashboard";
+import NoteBoard from "./Dashboard/NoteBoard";
 import {useParams} from "react-router-dom";
 
 const UserDashboard = () => {
@@ -22,8 +22,14 @@ const UserDashboard = () => {
 
     return (
         <div className={`${darkMode && 'dark-mode'}`}>
-            <Navbar isOpen={isOpen} handleToggleDarkMode={toggleDarkMode}></Navbar>
-            <Dashboard folderId={folderId} isOpen={isOpen} setIsOpen={setIsOpen}></Dashboard>
+            <Navbar isOpen={isOpen}
+                    handleToggleDarkMode={toggleDarkMode}
+            />
+            <NoteBoard
+                folderId={folderId}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+            />
         </div>
     );
 };

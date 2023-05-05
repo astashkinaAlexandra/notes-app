@@ -102,7 +102,7 @@ const Register = () => {
     };
 
     return (
-        <div className="box">
+        <div className="login-form">
             {!successful && (
                 <div>
                     <h2>Sign up</h2>

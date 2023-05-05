@@ -22,12 +22,17 @@ const deleteNote = (noteId) => {
     return axios.delete(API_URL + `/notes/${noteId}`);
 }
 
+const deleteAllNotesOfFolder = (folderId) => {
+    return axios.delete(API_URL + `/folders/${folderId}/notes`);
+}
+
 const NoteService = {
     getAllNotes,
     getNotesByFolderId,
     createNote,
     updateNote,
-    deleteNote
+    deleteNote,
+    deleteAllNotesOfFolder
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export

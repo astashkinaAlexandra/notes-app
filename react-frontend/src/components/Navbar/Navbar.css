@@ -151,6 +151,7 @@ nav .menu-items {
     align-items: center;
     justify-content: center;
     color: var(--black-light-color);
+    transition: var(--tran-05);
 }
 
 .menu-items li a .link-name {
@@ -161,15 +162,13 @@ nav .menu-items {
 }
 
 .menu-items li a input {
+    width: 100%;
     font-size: 18px;
     font-weight: 400;
     color: var(--black-light-color);
+    border: none;
     transition: var(--tran-05);
     background-color: var(--panel-color);
-}
-
-.menu-items li a input {
-    border: none;
 }
 
 .menu-items li a input:focus {
@@ -190,6 +189,7 @@ nav .menu-items {
 .menu-items .logout-mode {
     padding-top: 10px;
     border-top: 1px solid var(--border-color);
+    transition: var(--tran-05);
 }
 
 .menu-items .mode {

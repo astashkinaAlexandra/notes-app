@@ -6,7 +6,7 @@ body {
     /*background-color: #6991f1;*/
 }
 
-.box {
+.login-form {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -20,7 +20,7 @@ body {
     background-color: #ffffff;
 }
 
-.box h2 {
+.login-form h2 {
     margin: 0 0 -0.125rem;
     padding: 0;
     text-align: center;
@@ -30,7 +30,7 @@ body {
     font-weight: 400;
 }
 
-.box p {
+.login-form p {
     font-size: 16px;
     font-weight: 400;
     letter-spacing: .1px;
@@ -39,11 +39,11 @@ body {
     text-align: center;
 }
 
-.box .inputBox {
+.login-form .inputBox {
     position: relative;
 }
 
-.box .inputBox input {
+.login-form .inputBox input {
     width: 93%;
     padding: 0.625rem 10px;
     font-size: 1rem;
@@ -54,7 +54,7 @@ body {
     border-radius: 4px;
 }
 
-.box .inputBox label {
+.login-form .inputBox label {
     position: absolute;
     top: 0;
     left: 10px;
@@ -65,8 +65,8 @@ body {
     transition: 0.5s;
 }
 
-.box .inputBox:has(input:focus) > label,
-.box .inputBox:has(input:not([value=""])) > label {
+.login-form .inputBox:has(input:focus) > label,
+.login-form .inputBox:has(input:not([value=""])) > label {
     top: -0.725rem;
     left: 10px;
     color: #1a73e8;
@@ -77,12 +77,12 @@ body {
     padding-right: 5px;
 }
 
-.box .inputBox input:focus {
+.login-form .inputBox input:focus {
     outline: none;
     border: 2px solid #1a73e8;
 }
 
-.box .submit {
+.login-form .submit {
     border: none;
     outline: none;
     color: #fff;
@@ -94,12 +94,12 @@ body {
     float: right;
 }
 
-.box .submit:hover {
+.login-form .submit:hover {
     background-color: #287ae6;
     box-shadow: 0 1px 1px 0 rgba(66, 133, 244, 0.45), 0 1px 3px 1px rgba(66, 133, 244, 0.3);
 }
 
-.box .message {
+.login-form .message {
     width: 100%;
     border: 0;
     margin: -30px 0 0;
@@ -109,7 +109,7 @@ body {
     /*background: #FFBABA;*/
 }
 
-.box .success {
+.login-form .success {
     font-size: 20px;
     text-align: center;
 }

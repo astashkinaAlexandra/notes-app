@@ -6,14 +6,6 @@ body {
     background-color: #ffffff;
 }
 
-/*.container {*/
-/*    max-width: 960px;*/
-/*    margin-right: auto;*/
-/*    margin-left: auto;*/
-/*    padding-right: 15px;*/
-/*    padding-left: 15px;*/
-/*}*/
-
 .notes-list {
     display: grid;
     grid-gap: 1.5rem;
@@ -28,6 +20,7 @@ body {
     border-radius: 12px;
     padding: 15px 20px;
     background-color: var(--note1-color);
+    transition: var(--tran-05);
 }
 
 .note.new {
@@ -42,6 +35,7 @@ textarea {
     font-weight: 400;
     color: var(--text-color);
     background-color: var(--note1-color);
+    transition: var(--tran-05);
 }
 
 .note.new textarea {

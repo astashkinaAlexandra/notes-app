@@ -1,37 +1,25 @@
 import {IoLogOutOutline, IoMoonOutline} from 'react-icons/io5'
 import './Navbar.css';
 import logo from '../../images/logo.png';
-import Folder from "../Folder/Folder";
-import {useEffect, useState} from "react";
-import FolderService from "../../services/folder.service";
-import AddFolder from "../Folder/AddFolder";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import AuthService from "../../services/auth.service";
+import NavbarLinks from "./NavbarLinks";
 
 const Navbar = ({isOpen, handleToggleDarkMode}) => {
-    const currentUser = AuthService.getCurrentUser();
-    const [folders, setFolders] = useState([]);
+    const [currentUser, setCurrentUser] = useState(undefined);
+    const [showUserBoard, setShowUserBoard] = useState(false);
+    const [showAdminBoard, setShowAdminBoard] = useState(false);
 
     useEffect(() => {
-        getFoldersByUserId();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser.id]);
+        const user = AuthService.getCurrentUser();
 
-    const getFoldersByUserId = async () => {
-        await FolderService.getFoldersByUserId(currentUser.id).then(response => {
-            setFolders(response.data)
-        });
-    };
-
-    const addFolder = async (newFolder) => {
-        await FolderService.createFolder(currentUser.id, newFolder).then(() => {
-            getFoldersByUserId()
-        });
-    };
-
-    const deleteFolder = async (id) => {
-        FolderService.deleteFolder(id).then(response => setFolders(folders.filter((folder) => folder.id !== id)));
-    };
+        if (user) {
+            setCurrentUser(user);
+            setShowUserBoard(user.roles.includes("ROLE_USER"));
+            setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+        }
+    }, []);
 
     const logOut = () => {
         AuthService.logout();
@@ -43,30 +31,27 @@ const Navbar = ({isOpen, handleToggleDarkMode}) => {
                 <div className="logo-img">
                     <img src={logo} alt="logo"/>
                 </div>
-                <span className="logo_name">noteme</span>
+                <Link to={"/"} style={{textDecoration: 'none'}}>
+                    <span className="logo_name">noteme</span>
+                </Link>
             </div>
             <div className="menu-items">
-                <ul className="nav-links">
-                    {folders.map(folder => (
-                        <Link key={folder.id} to={`/folders/${folder.id}/notes`} style={{textDecoration: 'none'}}>
-                            <Folder key={folder.id}
-                                    folder={folder}
-                                    handleDeleteFolder={deleteFolder}
-                            />
-                        </Link>
-                    ))}
-                    <AddFolder handleAddFolder={addFolder}/>
-                </ul>
+                <NavbarLinks
+                    showUserBoard={showUserBoard}
+                    showAdminBoard={showAdminBoard}
+                />
                 <ul className="logout-mode">
-                    <li>
-                        <a href="/login" onClick={logOut}>
-                            <IoLogOutOutline className="icon"></IoLogOutOutline>
-                            <span className="link-name">Logout</span>
-                        </a>
-                    </li>
+                    {currentUser && (
+                        <li>
+                            <Link to={"/login"} onClick={logOut}>
+                                <IoLogOutOutline className="icon"/>
+                                <span className="link-name">Logout</span>
+                            </Link>
+                        </li>
+                    )}
                     <li className="mode">
                         <a href="#">
-                            <IoMoonOutline className="icon"></IoMoonOutline>
+                            <IoMoonOutline className="icon"/>
                             <span className="link-name">Dark Mode</span>
                         </a>
                         <div className="mode-toggle" onClick={handleToggleDarkMode}>

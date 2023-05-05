@@ -49,7 +49,7 @@ const Login = () => {
         if (checkBtn.current.context._errors.length === 0) {
             AuthService.login(username, password).then(
                 () => {
-                    navigate("/profile");
+                    navigate("/home");
                     window.location.reload();
                 },
                 (error) => {
@@ -70,7 +70,7 @@ const Login = () => {
     };
 
     return (
-        <div className="box">
+        <div className="login-form">
             <h2>Sign in</h2>
             <p>Use your Google Account</p>
             <Form onSubmit={handleLogin} ref={form}>

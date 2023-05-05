@@ -1,23 +1,19 @@
-import {useState} from "react";
+import React from "react";
+import {Link} from "react-router-dom";
 import {BsFolder} from "react-icons/bs";
-import {IoIosClose} from "react-icons/io"
+import {IoIosClose} from "react-icons/io";
 
 const Folder = ({folder, handleDeleteFolder}) => {
-    const [folderTitle, setFolderTitle] = useState(folder.title);
-
-    const handleChange = (event) => {
-        setFolderTitle(event.target.value);
-    }
-
     return (
         <li className="folder-item">
-            <a href="#">
-                <BsFolder className="icon"></BsFolder>
+            <Link key={folder.id} to={`/folders/${folder.id}/notes`} style={{textDecoration: 'none'}}>
+                <BsFolder className="icon"/>
                 <span className="link-name">{folder.title}</span>
-            </a>
+            </Link>
             <IoIosClose
                 onClick={() => handleDeleteFolder(folder.id)}
-                className="icon icon-delete"/>
+                className="icon icon-delete"
+            />
         </li>
     );
 };
