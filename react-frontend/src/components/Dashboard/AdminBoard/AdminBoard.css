@@ -1,0 +1,83 @@
+.dash-content .boxes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dash-content .boxes .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    width: calc(100% / 3 - 15px);
+    padding: 15px 20px;
+    background-color: var(--note1-color);
+    transition: var(--tran-05);
+}
+
+.boxes .box .icon {
+    font-size: 25px;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+.boxes .box .text {
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+.boxes .box .number {
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+.boxes .box.box2 {
+    background-color: var(--note3-color);
+}
+
+.boxes .box.box3 {
+    background-color: var(--note4-color);
+}
+
+table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1em;
+    background-color: var(--border-color);
+    border-bottom: 2px solid var(--panel-color);
+    transition: var(--tran-05);
+}
+
+table thead th {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+table td {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+table td span {
+    display: block;
+}
+
+table td span:not(:last-child) {
+    padding-bottom: 20px;
+}

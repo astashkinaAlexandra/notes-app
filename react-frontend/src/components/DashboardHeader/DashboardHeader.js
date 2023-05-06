@@ -1,9 +1,11 @@
 import React, {useState} from "react";
-import Search from "../Search";
+import Search from "../Search/Search";
 import Dropdown from "../Dropdown/Dropdown";
 import Avatar from "boring-avatars";
 import {HiBars3} from "react-icons/hi2";
 import AuthService from "../../services/auth.service";
+
+import './DashboardHeader.css'
 
 const DashboardHeader = ({setSearchText, isOpen, setIsOpen}) => {
     const currentUser = AuthService.getCurrentUser();

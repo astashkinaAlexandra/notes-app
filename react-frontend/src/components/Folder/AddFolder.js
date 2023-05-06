@@ -1,5 +1,5 @@
-import {AiOutlinePlus} from "react-icons/ai";
-import {useState} from "react";
+import React, {useState} from "react";
+import {TbPlus} from "react-icons/tb";
 
 const AddFolder = ({handleAddFolder}) => {
     const [folderTitle, setFolderTitle] = useState('');
@@ -22,19 +22,20 @@ const AddFolder = ({handleAddFolder}) => {
     };
 
     return (
-        <li>
-            <a href="#">
-                <AiOutlinePlus
-                    onClick={handleSaveClick}
-                    className="icon"/>
+        <div className="folder">
+            <TbPlus
+                onClick={handleSaveClick}
+                className="icon add"/>
+            <div className='folder-footer'>
                 <input
                     type='text'
-                    placeholder='Add folder...'
+                    placeholder='Add folder title...'
                     value={folderTitle}
                     onChange={handleChange}>
                 </input>
-            </a>
-        </li>
+                <button className='save-button' onClick={handleSaveClick}>Save</button>
+            </div>
+        </div>
     );
 };
 

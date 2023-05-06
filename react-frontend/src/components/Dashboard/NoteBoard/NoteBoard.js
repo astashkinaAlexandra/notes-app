@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 
-import DashboardHeader from "./DashboardHeader";
-import NoteListHeading from "../Notes/NoteListHeading";
-import NotesList from "../Notes/NotesList";
+import DashboardHeader from "../../DashboardHeader/DashboardHeader";
+import ListHeading from "../../Notes/ListHeading";
+import NotesList from "../../Notes/NotesList";
 
-import NoteService from "../../services/note.service";
+import NoteService from "../../../services/note.service";
+import {FaRegStickyNote} from "react-icons/fa";
 
 const NoteBoard = ({folderId, isOpen, setIsOpen}) => {
     const [notes, setNotes] = useState([]);
@@ -50,7 +51,10 @@ const NoteBoard = ({folderId, isOpen, setIsOpen}) => {
             />
             <div className="dash-content">
                 <div className="overview">
-                    <NoteListHeading heading='Notes'/>
+                    <ListHeading
+                        heading='Notes'
+                        icon={<FaRegStickyNote className="icon"/>}
+                    />
                     <NotesList
                         folderId={folderId}
                         notes={notes.filter((note) =>

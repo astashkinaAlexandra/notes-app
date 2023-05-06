@@ -21,6 +21,7 @@
     --note3-color: #FFE6AC;
     --note4-color: #E7D1FC;
     --title-icon-color: #fff;
+    --folder-icon-color: #6D61E1;
 
     /* ====== Transition ====== */
     --tran-05: all 0.5s ease;
@@ -46,10 +47,12 @@ body .dark-mode {
     --note3-color: #3A3B3C;
     --note4-color: #3A3B3C;
     --title-icon-color: #fff;
+    --folder-icon-color: #CCC;
 }
 
 ::placeholder {
     color: var(--black-light-color);
+    transition: var(--tran-05);
 }
 
 nav {
@@ -159,20 +162,6 @@ nav .menu-items {
     font-weight: 400;
     color: var(--black-light-color);
     transition: var(--tran-05);
-}
-
-.menu-items li a input {
-    width: 100%;
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--black-light-color);
-    border: none;
-    transition: var(--tran-05);
-    background-color: var(--panel-color);
-}
-
-.menu-items li a input:focus {
-    outline: none;
 }
 
 .nav.close li a .link-name,

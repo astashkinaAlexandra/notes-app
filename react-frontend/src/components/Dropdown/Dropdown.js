@@ -2,6 +2,7 @@ import React from "react";
 import AuthService from "../../services/auth.service";
 import Avatar from "boring-avatars";
 import {IoMailOutline, IoPersonOutline, IoLogOutOutline} from "react-icons/io5";
+import './Dropdown.css';
 
 const Dropdown = ({dropdown}) => {
     const currentUser = AuthService.getCurrentUser();

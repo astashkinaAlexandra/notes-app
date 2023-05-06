@@ -1,4 +1,5 @@
 import {AiOutlineSearch} from "react-icons/ai";
+import './Search.css'
 
 const Search = ({handleSearchNote}) => {
     return (

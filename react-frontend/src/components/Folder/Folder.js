@@ -1,20 +1,21 @@
 import React from "react";
+import {TbFolder, TbX} from "react-icons/tb";
 import {Link} from "react-router-dom";
-import {BsFolder} from "react-icons/bs";
-import {IoIosClose} from "react-icons/io";
 
 const Folder = ({folder, handleDeleteFolder}) => {
     return (
-        <li className="folder-item">
-            <Link key={folder.id} to={`/folders/${folder.id}/notes`} style={{textDecoration: 'none'}}>
-                <BsFolder className="icon"/>
-                <span className="link-name">{folder.title}</span>
+        <div className="folder folder1">
+            <div className="folder-top">
+                <TbX
+                    onClick={() => handleDeleteFolder(folder.id)}
+                    className="icon close"
+                />
+            </div>
+            <Link className="folder-content" to={`/folders/${folder.id}/notes`}>
+                <TbFolder className='icon'/>
+                <span className="text">{folder.title}</span>
             </Link>
-            <IoIosClose
-                onClick={() => handleDeleteFolder(folder.id)}
-                className="icon icon-delete"
-            />
-        </li>
+        </div>
     );
 };
 

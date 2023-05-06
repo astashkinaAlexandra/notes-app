@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {HiBars3} from "react-icons/hi2";
 import "./Home.css"
 import {Link} from "react-router-dom";
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 
 const Home = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -26,7 +26,7 @@ const Home = () => {
     };
 
     return (
-        <div>
+        <>
             <div className={isOpen ? "overlay" : "overlay close"}>
                 <div className="overlay-content">
                     <ul>
@@ -76,7 +76,7 @@ const Home = () => {
             </div>
             <HiBars3 className={isOpen ? "nav-menu" : "nav-menu close"} onClick={toggleMenu}/>
             <div className="background-image"></div>
-        </div>
+        </>
     );
 };
 

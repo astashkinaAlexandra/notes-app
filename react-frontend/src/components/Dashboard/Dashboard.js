@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
-import Navbar from "./Navbar/Navbar";
-import NoteBoard from "./Dashboard/NoteBoard";
+import Navbar from "../Navbar/Navbar";
 import {useParams} from "react-router-dom";
 
-const UserDashboard = () => {
+const Dashboard = ({board}) => {
     const {folderId} = useParams();
     const [isOpen, setIsOpen] = useState(localStorage.getItem('toggle') === 'true');
     const [darkMode, setDarkMode] = useState(localStorage.getItem('dark-mode') === 'true');
+
+    const Board = board;
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -22,10 +23,11 @@ const UserDashboard = () => {
 
     return (
         <div className={`${darkMode && 'dark-mode'}`}>
-            <Navbar isOpen={isOpen}
-                    handleToggleDarkMode={toggleDarkMode}
+            <Navbar
+                isOpen={isOpen}
+                handleToggleDarkMode={toggleDarkMode}
             />
-            <NoteBoard
+            <Board
                 folderId={folderId}
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
@@ -34,4 +36,4 @@ const UserDashboard = () => {
     );
 };
 
-export default UserDashboard;
+export default Dashboard;

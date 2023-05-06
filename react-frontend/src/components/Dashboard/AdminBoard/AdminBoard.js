@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from "react";
-import DashboardHeader from "./DashboardHeader";
-import NoteListHeading from "../Notes/NoteListHeading";
+import DashboardHeader from "../../DashboardHeader/DashboardHeader";
+import ListHeading from "../../Notes/ListHeading";
 
-import UserService from "../../services/user.service";
-import FolderService from "../../services/folder.service";
-import NoteService from "../../services/note.service";
+import UserService from "../../../services/user.service";
+import FolderService from "../../../services/folder.service";
+import NoteService from "../../../services/note.service";
 
-import './Dashboard.css';
+import '../Dashboard.css';
+import './AdminBoard.css';
 
 import {FiFolder, FiUsers} from "react-icons/fi";
 import {FaRegStickyNote} from "react-icons/fa";
+import {BsTable} from "react-icons/bs";
+import {BiTachometer} from "react-icons/bi";
 
 const AdminBoard = ({isOpen, setIsOpen}) => {
     const [users, setUsers] = useState([]);
@@ -50,7 +53,10 @@ const AdminBoard = ({isOpen, setIsOpen}) => {
             />
             <div className="dash-content">
                 <div className="overview">
-                    <NoteListHeading heading='Dashboard'/>
+                    <ListHeading
+                        heading='Dashboard'
+                        icon={<BiTachometer className="icon"/>}
+                    />
                     <div className="boxes">
                         <div className="box box1">
                             <FiUsers className="icon"/>
@@ -70,11 +76,13 @@ const AdminBoard = ({isOpen, setIsOpen}) => {
                     </div>
                 </div>
                 <div className="user-list">
-                    <NoteListHeading heading='User Table'/>
+                    <ListHeading
+                        heading='User Table'
+                        icon={<BsTable className="icon"/>}
+                    />
                     <table>
                         <thead>
-                        <th></th>
-                        <th>Name</th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
@@ -83,7 +91,6 @@ const AdminBoard = ({isOpen, setIsOpen}) => {
                         {users.filter(user => user.username.toLowerCase().includes(searchText)).map(filterUser => (
                             <tr>
                                 <td>{filterUser.id}</td>
-                                <td>{filterUser.username}</td>
                                 <td>{filterUser.username}</td>
                                 <td>{filterUser.email}</td>
                                 <td>

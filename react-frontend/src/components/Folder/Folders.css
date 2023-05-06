@@ -1,0 +1,78 @@
+.dash-content .folders {
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.dash-content .folders .folder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    min-height: 220px;
+    height: 100%;
+    background-color: var(--note2-color);
+    transition: var(--tran-05);
+}
+
+.folders .folder .folder-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.folders .folder .icon.close {
+    margin: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--black-light-color);
+    transition: var(--tran-05);
+}
+
+.folders .folder .icon,
+.folders .folder .icon.add {
+    margin: 0;
+    font-size: 60px;
+    color: var(--folder-icon-color);
+    transition: var(--tran-05);
+}
+
+.folders .folder .folder-content {
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.folders .folder .text {
+    white-space: nowrap;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--tran-05);
+}
+
+.folders .folder .folder-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.folders .folder .folder-footer input {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black-light-color);
+    border: none;
+    transition: var(--tran-05);
+    background-color: var(--note2-color);
+}
+
+.folders .folder .folder-footer input:focus {
+    outline: none;
+}
