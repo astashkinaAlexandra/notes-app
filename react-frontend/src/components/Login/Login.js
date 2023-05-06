@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import "./Login.css"
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -100,6 +100,9 @@ const Login = () => {
                     )}
                     <span>Login</span>
                 </button>
+                <Link to="/home">
+                    <button className="back">Back</button>
+                </Link>
                 {message && (
                     <div className="message">
                         {message}

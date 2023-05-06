@@ -7,7 +7,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
-    height: 0%;
+    height: 100%;
     width: 100%;
     background-color: rgb(50, 50, 50);
     background-color: rgba(0, 0, 0, 0.9);
@@ -16,10 +16,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.overlay.close {
-    height: 100%;
 }
 
 .overlay-content {
@@ -61,27 +57,4 @@ body {
 
 .background-image.close {
     height: 100%;
-}
-
-.nav-menu {
-    min-width: 1.5em;
-    margin: 0;
-    font-size: 40px;
-    color: #000;
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.nav-menu.close {
-    color: #fff;
-}
-
-.icon.sidebar-toggle {
-    margin: 0;
-    font-size: 26px;
-    color: var(--text-color);
-    cursor: pointer;
 }

@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {HiBars3} from "react-icons/hi2";
-import "./Home.css"
 import {Link} from "react-router-dom";
 import AuthService from "../../services/auth.service";
 
+import "./Home.css"
+
 const Home = () => {
-    const [isOpen, setIsOpen] = useState(true);
     const [showUserBoard, setShowUserBoard] = useState(false);
     const [showAdminBoard, setShowAdminBoard] = useState(false);
     const [currentUser, setCurrentUser] = useState(undefined);
-    const toggleMenu = () => setIsOpen(!isOpen);
 
     useEffect(() => {
         const user = AuthService.getCurrentUser();
@@ -27,14 +25,14 @@ const Home = () => {
 
     return (
         <>
-            <div className={isOpen ? "overlay" : "overlay close"}>
+            <div className="overlay">
                 <div className="overlay-content">
                     <ul>
-                        <li>
-                            <Link to={"/home"}>
-                                Home
-                            </Link>
-                        </li>
+                        {/*<li>*/}
+                        {/*    <Link to={"/home"}>*/}
+                        {/*        Home*/}
+                        {/*    </Link>*/}
+                        {/*</li>*/}
                         {showUserBoard && (
                             <li>
                                 <Link to={"/user"}>
@@ -74,7 +72,6 @@ const Home = () => {
                     </ul>
                 </div>
             </div>
-            <HiBars3 className={isOpen ? "nav-menu" : "nav-menu close"} onClick={toggleMenu}/>
             <div className="background-image"></div>
         </>
     );
