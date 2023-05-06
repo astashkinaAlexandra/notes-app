@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .dash-content .boxes .box {
@@ -80,4 +81,17 @@ table td span {
 
 table td span:not(:last-child) {
     padding-bottom: 20px;
+}
+
+@media (max-width: 780px) {
+    .dash-content .boxes .box {
+        width: calc(100% / 2 - 15px);
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .dash-content .boxes .box {
+        width: 100%;
+    }
 }

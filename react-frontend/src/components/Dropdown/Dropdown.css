@@ -67,3 +67,35 @@
     color: var(--text-color);
     transition: var(--tran-05);
 }
+
+@media (max-width: 1200px) {
+    .sub-menu {
+        padding: 15px;
+        margin: 12px;
+        border-radius: 10px;
+        transition: var(--tran-05);
+    }
+
+    .user-info h3 {
+        margin-left: 15px;
+        font-size: 16px;
+    }
+
+    .sub-menu-item {
+        height: 40px;
+    }
+
+    .sub-menu-item .icon {
+        min-width: 1.3em;
+    }
+
+    .sub-menu-item span {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .sub-menu-wrap.open {
+        max-height: 0;
+    }
+}

@@ -80,28 +80,30 @@ const AdminBoard = ({isOpen, setIsOpen}) => {
                         heading='User Table'
                         icon={<BsTable className="icon"/>}
                     />
-                    <table>
-                        <thead>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        </thead>
-                        <tbody>
-                        {users.filter(user => user.username.toLowerCase().includes(searchText)).map(filterUser => (
-                            <tr>
-                                <td>{filterUser.id}</td>
-                                <td>{filterUser.username}</td>
-                                <td>{filterUser.email}</td>
-                                <td>
-                                    {filterUser.roles.map((role) =>
-                                        <span>{role.name}</span>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    <div className="table-wrapper">
+                        <table>
+                            <thead>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            </thead>
+                            <tbody>
+                            {users.filter(user => user.username.toLowerCase().includes(searchText)).map(filterUser => (
+                                <tr>
+                                    <td>{filterUser.id}</td>
+                                    <td>{filterUser.username}</td>
+                                    <td>{filterUser.email}</td>
+                                    <td>
+                                        {filterUser.roles.map((role) =>
+                                            <span>{role.name}</span>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>

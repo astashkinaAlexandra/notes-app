@@ -29,3 +29,9 @@ nav.close ~ .dashboard .top {
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 480px) {
+    .dashboard .top .icon.sidebar-toggle {
+        display: none;
+    }
+}

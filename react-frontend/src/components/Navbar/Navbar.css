@@ -67,7 +67,7 @@ nav {
     transition: var(--tran-05);
 }
 
-.nav.close {
+nav.close {
     width: 73px;
 }
 
@@ -164,8 +164,7 @@ nav .menu-items {
     transition: var(--tran-05);
 }
 
-.nav.close li a .link-name,
-.nav.close li a input {
+.nav.close li a .link-name {
     opacity: 0;
     pointer-events: none;
 }
@@ -222,4 +221,33 @@ nav .menu-items {
 
 body .dark-mode .switch:before {
     left: 20px;
+}
+
+@media (max-width: 960px) {
+    .table-wrapper {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        width: 73px;
+    }
+
+    nav li a .link-name {
+        opacity: 0;
+        pointer-events: auto;
+    }
+
+    nav ~ .dashboard {
+        left: 73px;
+        width: calc(100% - 73px);
+    }
+
+    nav ~ .dashboard .top {
+        left: 73px;
+        width: calc(100% - 73px);
+    }
 }

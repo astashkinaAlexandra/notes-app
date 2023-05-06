@@ -16,7 +16,7 @@ const Dropdown = ({dropdown}) => {
             <div className="sub-menu">
                 <div className="user-info">
                     <Avatar
-                        size={50}
+                        size={45}
                         name={currentUser.username}
                         variant="beam"
                         colors={["#92A1C6", "#146A7C", "#F0AB3D", "#C271B4", "#C20D90"]}
