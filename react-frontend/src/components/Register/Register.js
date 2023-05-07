@@ -154,6 +154,9 @@ const Register = () => {
                 {message && (
                     <div className={successful ? "success" : "message"}>
                         {message}
+                        <Link to="/home">
+                            <button className="back">Back</button>
+                        </Link>
                     </div>
                 )}
                 <CheckButton style={{display: "none"}} ref={checkBtn}/>
