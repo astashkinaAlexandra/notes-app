@@ -20,7 +20,7 @@ const getModeratorBoard = () => {
 };
 
 const getAdminBoard = () => {
-    return axios.get(API_URL + "test/admin", {headers: authHeader()});
+    return axios.get(API_URL + "/test/admin", {headers: authHeader()});
 };
 
 const UserService = {

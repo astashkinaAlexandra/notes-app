@@ -2,9 +2,8 @@ import React, {useEffect, useState} from "react";
 import DashboardHeader from "../../DashboardHeader/DashboardHeader";
 import ListHeading from "../../Notes/ListHeading";
 
+import AdminService from "../../../services/admin.service";
 import UserService from "../../../services/user.service";
-import FolderService from "../../../services/folder.service";
-import NoteService from "../../../services/note.service";
 
 import '../Dashboard.css';
 import './AdminBoard.css';
@@ -16,14 +15,17 @@ import {BiTachometer} from "react-icons/bi";
 
 const AdminBoard = ({isOpen, setIsOpen}) => {
     const [users, setUsers] = useState([]);
-    const [folders, setFolders] = useState([]);
-    const [notes, setNotes] = useState([]);
     const [searchText, setSearchText] = useState('');
+
+    const [numberOfUsers, setNumberOfUsers] = useState(0);
+    const [numberOfFolders, setNumberOfFolders] = useState(0);
+    const [numberOfNotes, setNumberOfNotes] = useState(0);
 
     useEffect(() => {
         getUsers();
-        getFolders();
-        getNotes();
+        getNumberOfUsers();
+        getNumberOfFolders();
+        getNumberOfNotes();
     }, []);
 
     const getUsers = () => {
@@ -32,15 +34,21 @@ const AdminBoard = ({isOpen, setIsOpen}) => {
         });
     };
 
-    const getFolders = () => {
-        FolderService.getFolders().then(response => {
-            setFolders(response.data);
+    const getNumberOfUsers = () => {
+        AdminService.getNumberOfUsers().then(response => {
+            setNumberOfUsers(response.data);
         });
     };
 
-    const getNotes = () => {
-        NoteService.getAllNotes().then(response => {
-            setNotes(response.data);
+    const getNumberOfFolders = () => {
+        AdminService.getNumberOfFolders().then(response => {
+            setNumberOfFolders(response.data);
+        });
+    };
+
+    const getNumberOfNotes = () => {
+        AdminService.getNumberOfNotes().then(response => {
+            setNumberOfNotes(response.data);
         });
     };
 
@@ -61,17 +69,17 @@ const AdminBoard = ({isOpen, setIsOpen}) => {
                         <div className="box box1">
                             <FiUsers className="icon"/>
                             <span className="text">Total Users</span>
-                            <span className="number">{users.length}</span>
+                            <span className="number">{numberOfUsers}</span>
                         </div>
                         <div className="box box2">
                             <FiFolder className="icon"/>
                             <span className="text">Total Folders</span>
-                            <span className="number">{folders.length}</span>
+                            <span className="number">{numberOfFolders}</span>
                         </div>
                         <div className="box box3">
                             <FaRegStickyNote className="icon"/>
                             <span className="text">Total Notes</span>
-                            <span className="number">{notes.length}</span>
+                            <span className="number">{numberOfNotes}</span>
                         </div>
                     </div>
                 </div>

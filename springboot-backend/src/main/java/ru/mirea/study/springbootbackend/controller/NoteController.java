@@ -41,7 +41,7 @@ public class NoteController {
 
     // create note rest api
     @PostMapping("/folders/{id}/notes")
-    public ResponseEntity<Note> createFolderNote(@PathVariable(value = "id") Long folderId,
+    public ResponseEntity<Note> createNote(@PathVariable(value = "id") Long folderId,
                                                  @RequestBody Note noteRequest) throws ResourceNotFoundException {
         Note note = folderRepository.findById(folderId).map(folder -> {
             noteRequest.setFolder(folder);

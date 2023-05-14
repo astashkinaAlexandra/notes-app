@@ -49,14 +49,8 @@ public class FolderController {
         return ResponseEntity.ok().body(folder);
     }
 
-    // create folder rest api
-//    @PostMapping("/folders")
-//    public Folder createFolder(@RequestBody Folder folder) {
-//        return folderRepository.save(folder);
-//    }
-
     @PostMapping("/users/{id}/folders")
-    public ResponseEntity<Folder> createUserFolder(@PathVariable(value = "id") Long userId,
+    public ResponseEntity<Folder> createFolder(@PathVariable(value = "id") Long userId,
                                    @RequestBody Folder folderRequest) throws ResourceNotFoundException {
         Folder folder = userRepository.findById(userId).map(user -> {
             folderRequest.setUser(user);
